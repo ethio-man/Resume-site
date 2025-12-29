@@ -10,12 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("email").value;
       const message = document.getElementById("message").value;
 
-      // Construct mailto link
+      // Construct mailto link (encode subject and body so spaces/newlines work)
       const myEmail = "natymiskir@gmail.com";
       const subject = `Portfolio Contact from ${name}`;
-      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+      const body = `Name: ${name}\r\nEmail: ${email}\r\n\r\nMessage:\r\n${message}`;
 
-      window.location.href = `mailto:${myEmail}?subject=${subject}&body=${body}`;
+      const mailtoLink = `mailto:${myEmail}?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`;
+
+      window.location.href = mailtoLink;
     });
   }
 
